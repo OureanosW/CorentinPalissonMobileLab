@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/affichageList"
+    android:id="@+id/displayCatsFacts"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,7 +11,7 @@
 
 
     <ProgressBar
-        android:id="@+id/progressBar2"
+        android:id="@+id/progressBarCatsFacts"
         style="?android:attr/progressBarStyle"
         android:layout_width="159dp"
         android:layout_height="138dp"
@@ -23,27 +23,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewCatTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cat Facts Loading"
+        android:text="@string/cat_facts_loading"
+        android:textSize="30sp"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar2"
+        app:layout_constraintBottom_toTopOf="@+id/progressBarCatsFacts"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.23"
-        android:textSize="30dp"/>
+        app:layout_constraintVertical_bias="0.23" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="351dp"
-        android:layout_height="563dp"
+        android:id="@+id/recyclerViewCatsFacts"
+        android:layout_width="321dp"
+        android:layout_height="499dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.761" />
+        app:layout_constraintVertical_bias="0.586" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

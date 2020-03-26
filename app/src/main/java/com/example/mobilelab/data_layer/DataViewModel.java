@@ -23,7 +23,20 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 
+/**
+ * Class that access APIs to collect Data.
+ *
+ * This model is used for two different things: get some cats' fact,
+ * and get some dogs' image.
+ * Two different models could have been done, but since the name was general,
+ * I considered the purpose of this model could be general
+ */
+
+
+
 public class DataViewModel extends ViewModel {
+
+    private MutableLiveData<String> imageAdress = null;
     private MutableLiveData<ArrayList<String>> factsList = null;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -37,8 +50,19 @@ public class DataViewModel extends ViewModel {
         return factsList;
     }
 
+    public LiveData<String> getImage()
+    {
+        if(imageAdress == null)
+        {
+            imageAdress = new MutableLiveData<>();
 
-    void run(OkHttpClient client, String url) throws IOException
+        }
+        loadImage();
+        return imageAdress;
+    }
+
+
+    void runFacts(OkHttpClient client, String url) throws IOException
     {
         Request request = new Request.Builder()
                 .url(url)
@@ -73,10 +97,52 @@ public class DataViewModel extends ViewModel {
         });
     }
 
+    void runImage(OkHttpClient client, String url) throws IOException
+    {
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                String image = new String();
+                try (ResponseBody responseBody = response.body()) {
+                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+                    try {
+                        JSONObject obj = new JSONObject(response.body().string());
+                        image = obj.getString("message");
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    imageAdress.postValue(image);
+                }
+            }
+        });
+    }
+
     private void loadFacts() {
         OkHttpClient client = new OkHttpClient.Builder().build();
         try {
-            run(client, "https://catfact.ninja/facts?limit=10");
+            runFacts(client, "https://catfact.ninja/facts?limit=10");
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadImage()
+    {
+        OkHttpClient client = new OkHttpClient.Builder().build();
+        try {
+            runImage(client, "https://dog.ceo/api/breeds/image/random");
         } catch (
                 IOException e) {
             e.printStackTrace();

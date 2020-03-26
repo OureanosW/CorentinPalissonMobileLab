@@ -23,6 +23,11 @@ import com.squareup.picasso.Picasso;
 
 
 /**
+ * In Detail Fragment we will find a fact that has been received as parameter.
+ * It will be displayed as well as a picture of a cat.
+ *
+ *
+ *
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * {@link DetailFragment.OnFragmentInteractionListener} interface
@@ -31,19 +36,17 @@ import com.squareup.picasso.Picasso;
  * create an instance of this fragment.
  */
 public class DetailFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_FACT = "fact";
 
-    // TODO: Rename and change types of parameters
     private String fact;
 
     private OnFragmentInteractionListener mListener;
 
     private View rootView;
-    private TextView tv;
-    private ImageView iv;
-    private ProgressBar pb;
+    private TextView catFact;
+    private ImageView catImage;
+    private ProgressBar progressBarImage;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -51,7 +54,6 @@ public class DetailFragment extends Fragment {
      * @param fact Parameter fact.
      * @return A new instance of fragment DetailFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static DetailFragment newInstance(String fact) {
         DetailFragment fragment = new DetailFragment();
         Bundle args = new Bundle();
@@ -73,18 +75,18 @@ public class DetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-        tv = rootView.findViewById(R.id.textView3);
-        iv = rootView.findViewById(R.id.imageView2);
-        pb = rootView.findViewById(R.id.progressBar3);
-        tv.setText(fact);
+        catFact = rootView.findViewById(R.id.textViewCatFact);
+        catImage = rootView.findViewById(R.id.imageViewCatImage);
+        progressBarImage = rootView.findViewById(R.id.progressBarCatImage);
+        catFact.setText(fact);
         Picasso.get().load("https://cataas.com/cat")
                 .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                 .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
-                .into(iv, new Callback() {
+                .into(catImage, new Callback() {
                     @Override
                     public void onSuccess() {
-                        if (pb != null) {
-                            pb.setVisibility(View.GONE);
+                        if (progressBarImage != null) {
+                            progressBarImage.setVisibility(View.GONE);
                         }
                     }
 
@@ -103,7 +105,6 @@ public class DetailFragment extends Fragment {
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -138,7 +139,6 @@ public class DetailFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:title="Dogs"
+            android:id="@+id/action_dogs"
+            android:icon="@drawable/dog"/>
+
+        <item android:title="Cats"
+            android:id="@+id/action_cats"
+            android:icon="@drawable/cat"/>
+    </group>
+</menu>

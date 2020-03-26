@@ -1,4 +1,4 @@
-package com.example.mobilelab.models;
+package com.example.mobilelab.business_layer;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +13,16 @@ import com.example.mobilelab.OnFactListener;
 import com.example.mobilelab.R;
 
 import java.util.ArrayList;
+
+
+/**
+ *
+ * The FactsAdapter class will process the data collected in the data access layer.
+ * If the facts has to be modified or any operation on it, it has to be done here.
+ *
+ * Here the facts will just be put in TextViews with an Observer behavior to notify
+ * when it is clicked.
+ */
 
 public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.MyViewHolder> {
     public OnFactListener listener;
