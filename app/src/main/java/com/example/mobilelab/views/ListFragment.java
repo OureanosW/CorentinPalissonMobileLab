@@ -106,7 +106,7 @@ public class ListFragment extends Fragment implements OnFactListener {
     }
 
     @Override
-    public void OnFactClicked(String fact) {
+    public void onFactClicked(String fact) {
         Navigation.findNavController(rootView).navigate(ListFragmentDirections.actionListFragmentToDetailFragment(fact));
 
     }

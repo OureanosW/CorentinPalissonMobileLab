@@ -40,7 +40,7 @@ public class FactsAdapter extends RecyclerView.Adapter<FactsAdapter.MyViewHolder
             this.textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.OnFactClicked(textView.getText().toString());
+                    listener.onFactClicked(textView.getText().toString());
                 }
             });
 
